@@ -26,9 +26,11 @@ import javax.annotation.Nullable;
 public class RNDeviceModule extends ReactContextBaseJavaModule {
 
   ReactApplicationContext reactContext;
-
-  public RNDeviceModule(ReactApplicationContext reactContext) {
+  String brandForApp = null;
+  
+  public RNDeviceModule(ReactApplicationContext reactContext, String brand) {
     super(reactContext);
+    this.brandForApp = brand;
     this.reactContext = reactContext;
   }
 
@@ -117,6 +119,7 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
     constants.put("brand", Build.BRAND);
     constants.put("deviceId", Build.BOARD);
     constants.put("deviceLocale", this.getCurrentLanguage());
+    constants.put("brandForApp", this.brandForApp);
     constants.put("deviceCountry", this.getCurrentCountry());
     constants.put("uniqueId", Secure.getString(this.reactContext.getContentResolver(), Secure.ANDROID_ID));
     constants.put("systemManufacturer", Build.MANUFACTURER);
